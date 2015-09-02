@@ -9,7 +9,8 @@
 import Foundation
 
 public struct JSONValue {
-    internal var object: AnyObject
+    internal var wrapped: Any
+    internal var error: ErrorType? = nil
     
     /// Initialize a `JSONValue` by parsing the given `NSData`
     public init(parse data: NSData) throws {
@@ -24,28 +25,41 @@ public struct JSONValue {
         self = try JSONValue(parse: data)
     }
     
-    /// Initiazlie a `JSONValue` with the given object. This assumes the object is a
+    /// Initiazlie a `JSONValue` with the given value. This assumes the value is a
     /// JSON-compatible object (or you won’t be given much benefit by wrapping it in a
     /// `JSONValue`)
-    public init(_ object: AnyObject) {
-        self.object = object
+    public init(_ any: Any) {
+        wrapped = any
+    }
+    
+    internal init(error: ErrorType) {
+        self.wrapped = ()
+        self.error = error
     }
 }
 
 // Private helpers
 extension JSONValue {
     private func asArray() throws -> [JSONValue] {
-        guard let objectArray = self.object as? [AnyObject] else {
+        try throwIfError()
+        guard let objectArray = self.wrapped as? [AnyObject] else {
             throw JSONError(.IncompatibleType(typename: "array"), json: self)
         }
-        return objectArray.map(JSONValue.init)
+        return objectArray.map({ JSONValue($0) })
     }
     
     private func asDictionary() throws -> [String:JSONValue] {
-        guard let objectDictionary = self.object as? [String:AnyObject] else {
+        try throwIfError()
+        guard let objectDictionary = self.wrapped as? [String:AnyObject] else {
             throw JSONError(.IncompatibleType(typename: "dictionary"), json: self)
         }
-        return objectDictionary.transform(JSONValue.init)
+        return objectDictionary.transform({ JSONValue($0) })
+    }
+    
+    private func throwIfError() throws {
+        if let error = self.error {
+            throw error
+        }
     }
 }
 
@@ -59,10 +73,19 @@ extension JSONValue {
     /// Throws a `JSONError` if the receiver does not wrap a dictionary or if the given key does
     /// not exist in the dictionary.
     public func sub(key: String) throws -> JSONValue {
+        try throwIfError()
         guard let value = try self.asDictionary()[key] else {
             throw JSONError(.MissingKey(key: key), json: self)
         }
         return value
+    }
+    
+    public subscript(key: String) -> JSONValue {
+        do {
+            return try self.sub(key)
+        } catch {
+            return JSONValue(error: error)
+        }
     }
     
     /// Attempts to decode the receiver’s wrapped value as type `T`
@@ -70,6 +93,7 @@ extension JSONValue {
     /// Throws a `JSONError` if the receiver does not wrap a value that can be converted into the
     /// desired type.
     public func decode<T: JSONDecodable>() throws -> T {
+        try throwIfError()
         return try T.decode(self)
     }
 
@@ -78,6 +102,7 @@ extension JSONValue {
     /// Throws a `JSONError` if the receiver does not wrap a value that can be converted into  an
     /// array of the desired type.
     public func decode<T: JSONDecodable>() throws -> [T] {
+        try throwIfError()
         return try self.asArray().map(T.decode)
     }
 }

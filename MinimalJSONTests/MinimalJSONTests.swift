@@ -14,18 +14,18 @@ class MinimalJSONTests: XCTestCase {
     func testBasicTypes() {
         doFailingErrors {
             let json = try loadJSONNamed("types")
-            try assertEqual(json.sub("integer").decode() as Int, 42)
-            try assertEqual(json.sub("double").decode() as Double, 3.14)
-            try assertEqual(json.sub("string").decode() as String, "hello, world")
-            try assertEqual(json.sub("boolean").decode() as Bool, false)
-            try assertEqual(json.sub("array_string").decode() as [String], ["hello", "world"])
-            try assertEqual(json.sub("array_int").decode() as [Int], [1, 2, 3, 4, 5])
-            try assertEqual(json.sub("array_double").decode() as [Double], [1.2, 3.4, 5.6])
-            try assertEqual(json.sub("array_empty").decode() as [String], [])
-            try assertEqual(json.sub("array_empty").decode() as [Int], [])
-            try assertEqual(json.sub("array_empty").decode() as [NSURL], [])
-            try assertEqual(json.sub("dictionary").sub("integer").decode() as Int, 64)
-            try assertEqual(json.sub("dictionary").sub("string").decode() as String, "apples")
+            try assertEqual(json["integer"].decode() as Int, 42)
+            try assertEqual(json["double"].decode() as Double, 3.14)
+            try assertEqual(json["string"].decode() as String, "hello, world")
+            try assertEqual(json["boolean"].decode() as Bool, false)
+            try assertEqual(json["array_string"].decode() as [String], ["hello", "world"])
+            try assertEqual(json["array_int"].decode() as [Int], [1, 2, 3, 4, 5])
+            try assertEqual(json["array_double"].decode() as [Double], [1.2, 3.4, 5.6])
+            try assertEqual(json["array_empty"].decode() as [String], [])
+            try assertEqual(json["array_empty"].decode() as [Int], [])
+            try assertEqual(json["array_empty"].decode() as [NSURL], [])
+            try assertEqual(json["dictionary"]["integer"].decode() as Int, 64)
+            try assertEqual(json["dictionary"]["string"].decode() as String, "apples")
         }
     }
     
@@ -36,9 +36,9 @@ class MinimalJSONTests: XCTestCase {
         
         doFailingErrors {
             let json = try loadJSONNamed("foundation_types")
-            try assertEqual(json.sub("url").decode() as NSURL, controlURL)
-            try assertEqual(json.sub("date").decode() as NSDate, controlDate)
-            try assertEqual(json.sub("timezone").decode() as NSTimeZone, controlTimeZone)
+            try assertEqual(json["url"].decode() as NSURL, controlURL)
+            try assertEqual(json["date"].decode() as NSDate, controlDate)
+            try assertEqual(json["timezone"].decode() as NSTimeZone, controlTimeZone)
         }
     }
     

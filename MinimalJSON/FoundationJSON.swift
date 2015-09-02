@@ -12,7 +12,7 @@ extension JSONDecodable {
     /// Decode json types that come straight from `NSJSONSerialization`
     public static func decode(json: JSONValue) throws -> Self {
         /// Try to cast types, NSJSONSerialization-native types will succeed, others will throw
-        guard let decoded = json.object as? Self else {
+        guard let decoded = json.wrapped as? Self else {
             throw JSONError(.IncompatibleType(typename: "\(Self.self)"), json: json)
         }
         return decoded

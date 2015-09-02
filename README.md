@@ -10,7 +10,7 @@ This primarily set out to fulfill my own desire to have my JSON parsing happen w
 
 Types can implement `JSONInitializable` (best for value types) or `JSONDecodable` (better for classes because initializers from protocols is painful).
 
-All `JSONValue` “subscripting”<sup><a href="#sub">1</a></sup> and decoding methods throw, so errors can naturally flow to the top of your parser (or use `try?` to ignore acceptable errors such as optional keys).
+`JSONValue` uses Swift 2 error handling in order to let errors flow to the top of your parser (or use `try?` to ignore acceptable errors such as optional keys), while focusing decoding code on the happy path. The `decode()` and `sub()` methods throw errors, and the `JSONValue`’s subscript method propagates any errors to the returned `JSONValue`<sup><a href="#sub">1</a></sup> (to be thrown later when trying to `decode()`).
 
 ## Example
 
@@ -24,10 +24,10 @@ struct Person {
 
 extension Person: JSONInitializable {
     init(json: JSONValue) throws {
-        self.id = try json.sub("id").decode()
-        self.name = try json.sub("name").decode()
-        self.birthday = try? json.sub("birthday").decode()
-        self.website = try? json.sub("website").decode()
+        self.id = try json["id"].decode()
+        self.name = try json["name"].decode()
+        self.birthday = try? json["birthday"].decode()
+        self.website = try? json["urls"]["main_website"].decode()
     }
 }
 

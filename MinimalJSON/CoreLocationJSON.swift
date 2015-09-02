@@ -15,7 +15,7 @@ extension CLLocationCoordinate2D: JSONInitializable {
     ///     "longitude": -122.4409553
     ///   }
     public init(json: JSONValue) throws {
-        self.latitude = try json.sub("latitude").decode()
-        self.longitude = try json.sub("longitude").decode()
+        self.latitude = try json["latitude"].decode()
+        self.longitude = try json["longitude"].decode()
     }
 }

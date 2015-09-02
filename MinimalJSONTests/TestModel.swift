@@ -24,9 +24,9 @@ internal struct Person {
 
 extension Person: JSONInitializable {
     internal init(json: JSONValue) throws {
-        self.id = try json.sub("id").decode()
-        self.name = try json.sub("name").decode()
-        self.website = try? json.sub("website").decode()
+        self.id = try json["id"].decode()
+        self.name = try json["name"].decode()
+        self.website = try? json["website"].decode()
     }
 }
 
