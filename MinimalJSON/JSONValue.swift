@@ -80,6 +80,14 @@ extension JSONValue {
         return value
     }
     
+    public subscript(key: String) -> JSONValue {
+        do {
+            return try self.sub(key)
+        } catch {
+            return JSONValue(error: error)
+        }
+    }
+    
     /// Attempts to decode the receiver’s wrapped value as type `T`
     ///
     /// Throws a `JSONError` if the receiver does not wrap a value that can be converted into the
