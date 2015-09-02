@@ -10,6 +10,7 @@ import Foundation
 
 public struct JSONValue {
     internal var wrapped: Any
+    internal var error: ErrorType? = nil
     
     /// Initialize a `JSONValue` by parsing the given `NSData`
     public init(parse data: NSData) throws {
@@ -30,11 +31,17 @@ public struct JSONValue {
     public init(_ any: Any) {
         wrapped = any
     }
+    
+    internal init(error: ErrorType) {
+        self.wrapped = ()
+        self.error = error
+    }
 }
 
 // Private helpers
 extension JSONValue {
     private func asArray() throws -> [JSONValue] {
+        try throwIfError()
         guard let objectArray = self.wrapped as? [AnyObject] else {
             throw JSONError(.IncompatibleType(typename: "array"), json: self)
         }
@@ -42,10 +49,17 @@ extension JSONValue {
     }
     
     private func asDictionary() throws -> [String:JSONValue] {
+        try throwIfError()
         guard let objectDictionary = self.wrapped as? [String:AnyObject] else {
             throw JSONError(.IncompatibleType(typename: "dictionary"), json: self)
         }
         return objectDictionary.transform({ JSONValue($0) })
+    }
+    
+    private func throwIfError() throws {
+        if let error = self.error {
+            throw error
+        }
     }
 }
 
@@ -59,6 +73,7 @@ extension JSONValue {
     /// Throws a `JSONError` if the receiver does not wrap a dictionary or if the given key does
     /// not exist in the dictionary.
     public func sub(key: String) throws -> JSONValue {
+        try throwIfError()
         guard let value = try self.asDictionary()[key] else {
             throw JSONError(.MissingKey(key: key), json: self)
         }
@@ -70,6 +85,7 @@ extension JSONValue {
     /// Throws a `JSONError` if the receiver does not wrap a value that can be converted into the
     /// desired type.
     public func decode<T: JSONDecodable>() throws -> T {
+        try throwIfError()
         return try T.decode(self)
     }
 
@@ -78,6 +94,7 @@ extension JSONValue {
     /// Throws a `JSONError` if the receiver does not wrap a value that can be converted into  an
     /// array of the desired type.
     public func decode<T: JSONDecodable>() throws -> [T] {
+        try throwIfError()
         return try self.asArray().map(T.decode)
     }
 }
