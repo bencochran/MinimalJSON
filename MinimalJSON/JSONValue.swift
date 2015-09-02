@@ -9,7 +9,7 @@
 import Foundation
 
 public struct JSONValue {
-    internal var object: AnyObject
+    internal var wrapped: Any
     
     /// Initialize a `JSONValue` by parsing the given `NSData`
     public init(parse data: NSData) throws {
@@ -24,28 +24,28 @@ public struct JSONValue {
         self = try JSONValue(parse: data)
     }
     
-    /// Initiazlie a `JSONValue` with the given object. This assumes the object is a
+    /// Initiazlie a `JSONValue` with the given value. This assumes the value is a
     /// JSON-compatible object (or you won’t be given much benefit by wrapping it in a
     /// `JSONValue`)
-    public init(_ object: AnyObject) {
-        self.object = object
+    public init(_ any: Any) {
+        wrapped = any
     }
 }
 
 // Private helpers
 extension JSONValue {
     private func asArray() throws -> [JSONValue] {
-        guard let objectArray = self.object as? [AnyObject] else {
+        guard let objectArray = self.wrapped as? [AnyObject] else {
             throw JSONError(.IncompatibleType(typename: "array"), json: self)
         }
-        return objectArray.map(JSONValue.init)
+        return objectArray.map({ JSONValue($0) })
     }
     
     private func asDictionary() throws -> [String:JSONValue] {
-        guard let objectDictionary = self.object as? [String:AnyObject] else {
+        guard let objectDictionary = self.wrapped as? [String:AnyObject] else {
             throw JSONError(.IncompatibleType(typename: "dictionary"), json: self)
         }
-        return objectDictionary.transform(JSONValue.init)
+        return objectDictionary.transform({ JSONValue($0) })
     }
 }
 
