@@ -1,0 +1,15 @@
+[
+    {
+        "id": 1,
+        "name": "Ben",
+        "website" : "http://bencochran.com"
+    },
+    {
+        "id": 3,
+        "name": "Chris"
+    },
+    {
+        "id": 4,
+        "name": "Kat"
+    }
+]
