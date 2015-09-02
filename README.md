@@ -31,7 +31,7 @@ extension Person: JSONInitializable {
     }
 }
 
-let jsonString = "{ "id" : 1, "name" : "Ben"}"
+let jsonString = "{ \"id\" : 1, \"name\" : \"Ben\"}"
 
 do {
     let json = JSONValue(parse: jsonString)
