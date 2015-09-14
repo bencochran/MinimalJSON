@@ -62,4 +62,14 @@ class MinimalJSONTests: XCTestCase {
             try assertEqual(json.decode() as [Person], controlPeople)
         }
     }
+    
+    func testArrayAccess() {
+        doFailingErrors {
+            let json = try loadJSONNamed("array_person")
+            try assertEqual(json[0]["name"].decode() as String, "Ben")
+            try assertEqual(json[1]["name"].decode() as String, "Chris")
+            try assertEqual(json[-2]["name"].decode() as String, "Chris")
+            try assertEqual(json[-1]["id"].decode() as Int, 4)
+        }
+    }
 }

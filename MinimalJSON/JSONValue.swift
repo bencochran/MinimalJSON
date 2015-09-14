@@ -74,9 +74,33 @@ extension JSONValue {
         return value
     }
     
+    public func sub(var index: Int) throws -> JSONValue {
+        try throwIfError()
+        let array = try self.asArray()
+        if index < 0 {
+            let backwardsIndex = array.endIndex.advancedBy(index)
+            guard backwardsIndex >= 0 else {
+                throw JSONError(.OutOfBounds(index: index), json: self)
+            }
+            index = backwardsIndex
+        }
+        guard index < array.endIndex else {
+            throw JSONError(.OutOfBounds(index: index), json: self)
+        }
+        return array[index]
+    }
+    
     public subscript(key: String) -> JSONValue {
         do {
             return try self.sub(key)
+        } catch {
+            return JSONValue(error: error)
+        }
+    }
+    
+    public subscript(index: Int) -> JSONValue {
+        do {
+            return try self.sub(index)
         } catch {
             return JSONValue(error: error)
         }

@@ -11,6 +11,7 @@ import Foundation
 public enum JSONErrorType {
     case UnableToParse
     case MissingKey(key: String)
+    case OutOfBounds(index: Int)
     case IncompatibleType(typename: String)
 }
 
