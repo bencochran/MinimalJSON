@@ -17,8 +17,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B8404B231B94DEF100B1F444"
-               BuildableName = "MinimalJSONTests.xctest"
-               BlueprintName = "MinimalJSONTests"
+               BuildableName = "MinimalJSON-iOSTests.xctest"
+               BlueprintName = "MinimalJSON-iOSTests"
                ReferencedContainer = "container:MinimalJSON.xcodeproj">
             </BuildableReference>
          </TestableReference>
