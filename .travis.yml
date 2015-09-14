@@ -3,3 +3,4 @@ osx_image: xcode7
 script:
 - xctool clean build -scheme MinimalJSON-iOS -sdk iphonesimulator -destination OS=9.0,name=iPhone\ 6
 - xcodebuild test -scheme MinimalJSON-iOS -sdk iphonesimulator -destination OS=9.0,name=iPhone\ 6
+- xctool clean build -scheme MinimalJSON-Mac -sdk macosx
