@@ -6,7 +6,7 @@
 //  Copyright © 2015 Ben Cochran. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for MinimalJSON.
 FOUNDATION_EXPORT double MinimalJSONVersionNumber;
