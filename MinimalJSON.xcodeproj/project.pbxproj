@@ -36,6 +36,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B814A8021BA69DA500B8F6BD /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		B814A8041BA69DA500B8F6BD /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		B814A8051BA69DA500B8F6BD /* Profile.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Profile.xcconfig; sourceTree = "<group>"; };
+		B814A8061BA69DA500B8F6BD /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		B814A8071BA69DA500B8F6BD /* Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Test.xcconfig; sourceTree = "<group>"; };
+		B814A8091BA69DA500B8F6BD /* Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Application.xcconfig; sourceTree = "<group>"; };
+		B814A80A1BA69DA500B8F6BD /* Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Framework.xcconfig; sourceTree = "<group>"; };
+		B814A80B1BA69DA500B8F6BD /* StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = StaticLibrary.xcconfig; sourceTree = "<group>"; };
+		B814A82D1BA69DA500B8F6BD /* iOS-Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-Application.xcconfig"; sourceTree = "<group>"; };
+		B814A82E1BA69DA500B8F6BD /* iOS-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-Base.xcconfig"; sourceTree = "<group>"; };
+		B814A82F1BA69DA500B8F6BD /* iOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-Framework.xcconfig"; sourceTree = "<group>"; };
+		B814A8301BA69DA500B8F6BD /* iOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		B814A8321BA69DA500B8F6BD /* Mac-Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Mac-Application.xcconfig"; sourceTree = "<group>"; };
+		B814A8331BA69DA500B8F6BD /* Mac-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Mac-Base.xcconfig"; sourceTree = "<group>"; };
+		B814A8341BA69DA500B8F6BD /* Mac-DynamicLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Mac-DynamicLibrary.xcconfig"; sourceTree = "<group>"; };
+		B814A8351BA69DA500B8F6BD /* Mac-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Mac-Framework.xcconfig"; sourceTree = "<group>"; };
+		B814A8361BA69DA500B8F6BD /* Mac-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Mac-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		B814A8391BA69DA500B8F6BD /* tvOS-Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-Application.xcconfig"; sourceTree = "<group>"; };
+		B814A83A1BA69DA500B8F6BD /* tvOS-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-Base.xcconfig"; sourceTree = "<group>"; };
+		B814A83B1BA69DA500B8F6BD /* tvOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-Framework.xcconfig"; sourceTree = "<group>"; };
+		B814A83C1BA69DA500B8F6BD /* tvOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "tvOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
+		B814A83E1BA69DA500B8F6BD /* watchOS-Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Application.xcconfig"; sourceTree = "<group>"; };
+		B814A83F1BA69DA500B8F6BD /* watchOS-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Base.xcconfig"; sourceTree = "<group>"; };
+		B814A8401BA69DA500B8F6BD /* watchOS-Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-Framework.xcconfig"; sourceTree = "<group>"; };
+		B814A8411BA69DA500B8F6BD /* watchOS-StaticLibrary.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS-StaticLibrary.xcconfig"; sourceTree = "<group>"; };
 		B8404B1A1B94DEF100B1F444 /* MinimalJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MinimalJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8404B1D1B94DEF100B1F444 /* MinimalJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MinimalJSON.h; sourceTree = "<group>"; };
 		B8404B1F1B94DEF100B1F444 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,12 +101,102 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B814A7FF1BA69DA500B8F6BD /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				B814A8011BA69DA500B8F6BD /* Base */,
+				B814A82C1BA69DA500B8F6BD /* iOS */,
+				B814A8311BA69DA500B8F6BD /* Mac OS X */,
+				B814A8381BA69DA500B8F6BD /* tvOS */,
+				B814A83D1BA69DA500B8F6BD /* watchOS */,
+			);
+			name = Configuration;
+			path = Carthage/Checkouts/xcconfigs;
+			sourceTree = "<group>";
+		};
+		B814A8011BA69DA500B8F6BD /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				B814A8021BA69DA500B8F6BD /* Common.xcconfig */,
+				B814A8031BA69DA500B8F6BD /* Configurations */,
+				B814A8081BA69DA500B8F6BD /* Targets */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		B814A8031BA69DA500B8F6BD /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				B814A8041BA69DA500B8F6BD /* Debug.xcconfig */,
+				B814A8051BA69DA500B8F6BD /* Profile.xcconfig */,
+				B814A8061BA69DA500B8F6BD /* Release.xcconfig */,
+				B814A8071BA69DA500B8F6BD /* Test.xcconfig */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
+		B814A8081BA69DA500B8F6BD /* Targets */ = {
+			isa = PBXGroup;
+			children = (
+				B814A8091BA69DA500B8F6BD /* Application.xcconfig */,
+				B814A80A1BA69DA500B8F6BD /* Framework.xcconfig */,
+				B814A80B1BA69DA500B8F6BD /* StaticLibrary.xcconfig */,
+			);
+			path = Targets;
+			sourceTree = "<group>";
+		};
+		B814A82C1BA69DA500B8F6BD /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				B814A82D1BA69DA500B8F6BD /* iOS-Application.xcconfig */,
+				B814A82E1BA69DA500B8F6BD /* iOS-Base.xcconfig */,
+				B814A82F1BA69DA500B8F6BD /* iOS-Framework.xcconfig */,
+				B814A8301BA69DA500B8F6BD /* iOS-StaticLibrary.xcconfig */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		B814A8311BA69DA500B8F6BD /* Mac OS X */ = {
+			isa = PBXGroup;
+			children = (
+				B814A8321BA69DA500B8F6BD /* Mac-Application.xcconfig */,
+				B814A8331BA69DA500B8F6BD /* Mac-Base.xcconfig */,
+				B814A8341BA69DA500B8F6BD /* Mac-DynamicLibrary.xcconfig */,
+				B814A8351BA69DA500B8F6BD /* Mac-Framework.xcconfig */,
+				B814A8361BA69DA500B8F6BD /* Mac-StaticLibrary.xcconfig */,
+			);
+			path = "Mac OS X";
+			sourceTree = "<group>";
+		};
+		B814A8381BA69DA500B8F6BD /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				B814A8391BA69DA500B8F6BD /* tvOS-Application.xcconfig */,
+				B814A83A1BA69DA500B8F6BD /* tvOS-Base.xcconfig */,
+				B814A83B1BA69DA500B8F6BD /* tvOS-Framework.xcconfig */,
+				B814A83C1BA69DA500B8F6BD /* tvOS-StaticLibrary.xcconfig */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		B814A83D1BA69DA500B8F6BD /* watchOS */ = {
+			isa = PBXGroup;
+			children = (
+				B814A83E1BA69DA500B8F6BD /* watchOS-Application.xcconfig */,
+				B814A83F1BA69DA500B8F6BD /* watchOS-Base.xcconfig */,
+				B814A8401BA69DA500B8F6BD /* watchOS-Framework.xcconfig */,
+				B814A8411BA69DA500B8F6BD /* watchOS-StaticLibrary.xcconfig */,
+			);
+			path = watchOS;
+			sourceTree = "<group>";
+		};
 		B8404B101B94DEF100B1F444 = {
 			isa = PBXGroup;
 			children = (
 				B8404B1C1B94DEF100B1F444 /* MinimalJSON */,
 				B8404B281B94DEF100B1F444 /* MinimalJSONTests */,
 				B8404B1B1B94DEF100B1F444 /* Products */,
+				B814A7FF1BA69DA500B8F6BD /* Configuration */,
 			);
 			sourceTree = "<group>";
 		};
