@@ -41,18 +41,12 @@ public struct JSONValue {
 // Private helpers
 extension JSONValue {
     private func asArray() throws -> [JSONValue] {
-        try throwIfError()
-        guard let objectArray = self.wrapped as? [AnyObject] else {
-            throw JSONError(.IncompatibleType(typename: "array"), json: self)
-        }
+        let objectArray: [AnyObject] = try self.decode()
         return objectArray.map({ JSONValue($0) })
     }
     
     private func asDictionary() throws -> [String:JSONValue] {
-        try throwIfError()
-        guard let objectDictionary = self.wrapped as? [String:AnyObject] else {
-            throw JSONError(.IncompatibleType(typename: "dictionary"), json: self)
-        }
+        let objectDictionary: [String:AnyObject] = try self.decode()
         return objectDictionary.transform({ JSONValue($0) })
     }
     
@@ -104,5 +98,29 @@ extension JSONValue {
     public func decode<T: JSONDecodable>() throws -> [T] {
         try throwIfError()
         return try self.asArray().map(T.decode)
+    }
+
+    public func decode() throws -> AnyObject {
+        try throwIfError()
+        guard let object = self.wrapped as? AnyObject else {
+            throw JSONError(.IncompatibleType(typename: "AnyObject"), json: self)
+        }
+        return object
+    }
+    
+    public func decode() throws -> [AnyObject] {
+        try throwIfError()
+        guard let objectArray = self.wrapped as? [AnyObject] else {
+            throw JSONError(.IncompatibleType(typename: "array"), json: self)
+        }
+        return objectArray
+    }
+    
+    public func decode() throws -> [String:AnyObject] {
+        try throwIfError()
+        guard let objectDictionary = self.wrapped as? [String:AnyObject] else {
+            throw JSONError(.IncompatibleType(typename: "dictionary"), json: self)
+        }
+        return objectDictionary
     }
 }
