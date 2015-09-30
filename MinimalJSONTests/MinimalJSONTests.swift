@@ -72,4 +72,38 @@ class MinimalJSONTests: XCTestCase {
             try assertEqual(json[-1]["id"].decode() as Int, 4)
         }
     }
+    
+    func testCollectionConformance() {
+        doFailingErrors {
+            let json = try loadJSONNamed("array_person")
+            assertEqual(json.startIndex, 0)
+            assertEqual(json.endIndex, 3)
+            assertEqual(json.count, 3)
+            let controlNames = ["Ben", "Chris", "Kat"]
+            for (i, personJSON) in json.enumerate() {
+                try assertEqual(personJSON["name"].decode() as String, controlNames[i])
+            }
+        }
+    }
+    
+    func testNonCollection() {
+        doFailingErrors {
+            let json = try loadJSONNamed("foundation_types")
+            assertEqual(json.startIndex, 0)
+            // Expect 1 as per JSONValue's conformance to CollectionType
+            assertEqual(json.endIndex, 1)
+            assertEqual(json.count, 1)
+            for jsonPart in json {
+                do {
+                    let _: AnyObject = try jsonPart.decode()
+                    XCTFail("Should not be able to enumerate non-array")
+                } catch let error as JSONError {
+                    XCTAssertEqual(error.type, JSONErrorType.IncompatibleType(typename: "array"))
+                } catch {
+                    XCTFail("Unexpected error \(error)")
+                }
+                
+            }
+        }
+    }
 }
