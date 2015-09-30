@@ -148,3 +148,21 @@ extension JSONValue {
         return objectDictionary
     }
 }
+
+
+extension JSONValue : CollectionType {
+    public var startIndex: Int {
+        return 0
+    }
+    /// The `endIndex` of the collection that is wrapped by this JSONValue. If
+    /// the wrapped value is not a collection, this return 1 so that in most
+    /// common cases you will try to subscript the JSONValue, resulting in an
+    /// error. (Since `endIndex` itself cannot throw an error)
+    public var endIndex: Int {
+        do {
+            return try asArray().endIndex
+        } catch {
+            return 1
+        }
+    }
+}
