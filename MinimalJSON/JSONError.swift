@@ -35,3 +35,14 @@ extension JSONError: CustomDebugStringConvertible {
         return "JSONError(\(type), json: \(jsonString))"
     }
 }
+
+extension JSONErrorType: Equatable { }
+public func ==(lhs: JSONErrorType, rhs: JSONErrorType) -> Bool {
+    switch (lhs, rhs) {
+    case (.UnableToParse, .UnableToParse): return true
+    case let (.MissingKey(l), .MissingKey(r)): return l == r
+    case let (.OutOfBounds(l), .OutOfBounds(r)): return l == r
+    case let (.IncompatibleType(l), .IncompatibleType(r)): return l == r
+    default: return false
+    }
+}
